@@ -66,6 +66,17 @@ namespace Acme.BusinessLayer.XUnitTests
         }
 
         [Fact]
+        public void EmailAddress_GivenCorrectEmail_ReturnEmailAddress()
+        {
+            var customer = new Customer();
+            customer.EmailAddress = "a@example.com";
+
+            var actual = customer.EmailAddress;
+
+            Assert.Equal("a@example.com", actual);
+        }
+
+        [Fact]
         public void EmailAddress_GivenEmailAddressNull_ThrowsArgumentNullException()
         {
             var customer = new Customer();
@@ -88,5 +99,14 @@ namespace Acme.BusinessLayer.XUnitTests
 
             Assert.Throws<ArgumentNullException>(() => customer.EmailAddress = " ");
         }
+
+        [Fact]
+        public void EmailAddress_GivenIncorrectEmail_ReturnErrorMessage()
+        {
+            var customer = new Customer();
+
+            Assert.Throws<ArgumentException>(() => customer.EmailAddress = "abc");
+        }
+
     }
 }
