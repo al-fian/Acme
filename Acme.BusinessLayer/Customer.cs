@@ -31,7 +31,19 @@
         }
 
         public string FullName => $"{LastName}, {FirstName}";
-        public string? EmailAddress { get; set; }
+
+        private string? _emailAddress;
+        public string? EmailAddress 
+        { 
+            get => _emailAddress; 
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException("Email Address cannot be empty");
+                
+                _emailAddress = value;
+            }
+        }
 
     }
 }
