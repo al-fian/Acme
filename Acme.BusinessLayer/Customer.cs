@@ -52,6 +52,9 @@ namespace Acme.BusinessLayer
             }
         }
 
+        [EmailAddress]
+        public string? Email2 { get; set; }
+
         // copied pasted from the Microsoft docs
         public bool IsValidEmail(string email)
         {
@@ -76,11 +79,11 @@ namespace Acme.BusinessLayer
                     return match.Groups[1].Value + domainName;
                 }
             }
-            catch (RegexMatchTimeoutException e)
+            catch (RegexMatchTimeoutException)
             {
                 return false;
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 return false;
             }

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Acme.BusinessLayer.XUnitTests
 {
     public class CustomerTest
@@ -101,11 +103,23 @@ namespace Acme.BusinessLayer.XUnitTests
         }
 
         [Fact]
-        public void EmailAddress_GivenIncorrectEmail_ReturnErrorMessage()
+        public void EmailAddress_GivenIncorrectEmail_ThrowArgumentException()
         {
             var customer = new Customer();
 
             Assert.Throws<ArgumentException>(() => customer.EmailAddress = "abc");
+        }
+
+        [Fact]
+        public void EmailAddress2_GivenIncorrectEmail_ReturnFalse()
+        {
+            var customer = new Customer();
+            customer.Email2 = "abc";
+            var emailAttribute = new EmailAddressAttribute();
+
+            var actual = emailAttribute.IsValid(customer.Email2);
+
+            Assert.False(actual);
         }
 
     }
