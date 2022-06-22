@@ -65,6 +65,28 @@ namespace Acme.BusinessLayer.NUnitTests
             Assert.That(expected, Is.EqualTo(actual));
         }
 
+        [Test]
+        public void EmailAddress_GivenEmailAddressNull_ThrowsArgumentNullException()
+        {
+            var customer = new Customer();
 
+            Assert.That(() => customer.EmailAddress = null, Throws.Exception.TypeOf<ArgumentNullException>());
+        }
+
+        [Test]
+        public void EmailAddress_GivenEmailAddressEmptyString_ThrowsArgumentNullException()
+        {
+            var customer = new Customer();
+
+            Assert.That(() => customer.EmailAddress = "", Throws.Exception.TypeOf<ArgumentNullException>());
+        }
+
+        [Test]
+        public void EmailAddress_GivenEmailAddressEmptySpace_ThrowsArgumentNullException()
+        {
+            var customer = new Customer();
+
+            Assert.That(() => customer.EmailAddress = " ", Throws.Exception.TypeOf<ArgumentNullException>());
+        }
     }
 }
